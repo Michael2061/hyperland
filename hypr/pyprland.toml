@@ -1,0 +1,7 @@
+[pyprland]
+plugins = ["scratchpads"]
+[scratchpads.stats]
+command = "kitty --class btop_stats -e btop"
+animation = "fromTop"
+size = "60% 50%"
+unfocus = "hide"

@@ -1,0 +1,46 @@
+{
+    "layer": "top",
+    "position": "top",
+    "output": ["DP-1", "DP-2", "DP-3"],
+    "margin-top": 8,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 10,
+    "modules-left": ["custom/launch", "hyprland/workspaces", "network"],
+    "modules-center": ["custom/music"],
+    "modules-right": ["cpu", "memory", "pulseaudio", "tray", "clock"],
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "all-outputs": false,
+        "sort-by-number": true
+    },
+    "network": {
+        "format-wifi": "  {bandwidthDownBits}",
+        "format-ethernet": "󰈀  {bandwidthDownBits}",
+        "interval": 2
+    },
+    "custom/music": {
+        "format": "󰝚  {}",
+        "exec": "playerctl metadata --format '{{ title }} - {{ artist }}' || echo 'Silence'",
+        "interval": 5,
+        "on-click": "playerctl play-pause"
+    },
+    "clock": {
+        "format": " {:%H:%M} ",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": { "format": " {usage}%" },
+    "memory": { "format": " {used}GB" },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": { "default": ["", "", ""] }
+    },
+    "custom/launch": {
+        "format": "󰈸",
+        "on-click": "rofi -show drun"
+    },
+    "tray": { "spacing": 10 }
+}
