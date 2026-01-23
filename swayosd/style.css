@@ -1,0 +1,25 @@
+/* Der Platzhalter __HOME__ wird vom Skript ersetzt */
+@import url("file://__HOME__/.cache/wal/colors-waybar.css");
+
+window {
+    background: rgba(10, 10, 15, 0.85);
+    border: 2px solid @color2; /* Farbe von pywal */
+    border-radius: 15px;
+}
+
+#label {
+color: @foreground;
+font-family: "JetBrainsMono Nerd Font";
+font-size: 16px;
+}
+
+#bar {
+background: rgba(255, 255, 255, 0.1);
+min-width: 200px;
+min-height: 12px;
+border-radius: 6px;
+}
+
+#trough {
+background-color: @color2; /* Balkenfarbe von pywal */
+}
