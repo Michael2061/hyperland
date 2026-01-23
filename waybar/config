@@ -24,12 +24,14 @@
         "interval": 2
     },
 
-    "custom/music": {
-        "format": "󰝚  {}",
-        "exec": "playerctl metadata --format '{{ title }} - {{ artist }}' || echo 'Silence'",
-        "interval": 5,
-        "on-click": "playerctl play-pause"
-    },
+"custom/music": {
+    "format": "󰝚  {}",
+    "escape": true,
+    "interval": 5,
+    "exec": "playerctl metadata --format '{{ title }}' 2>/dev/null || echo 'Kein Player aktiv'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
+},
 
     "clock": {
         "format": "{:%H:%M}",
