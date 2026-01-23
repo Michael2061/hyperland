@@ -45,16 +45,23 @@ else
 fi
 
 # WAYBAR START (Wichtig: Wir fangen alle Fehlermeldungen ab)
+# Ersetze den letzten Teil deiner wallpaper_engine.sh
 echo "🚀 Starte Waybar Prozess..." >> "$LOG_FILE"
 (waybar 2>> "$LOG_FILE" &)
 
-# Kurzer Check nach 3 Sekunden
-sleep 3
+# Warte etwas länger, bevor wir SwayOSD ansprechen
+sleep 5
 if pgrep -x "waybar" > /dev/null; then
     echo "✅ Waybar läuft erfolgreich (PID: $(pgrep -x waybar))" >> "$LOG_FILE"
 else
     echo "❌ Waybar ist direkt nach dem Start wieder abgestürzt!" >> "$LOG_FILE"
 fi
 
-swayosd-client --reload-style >> "$LOG_FILE" 2>&1
+# Prüfe erst, ob der SwayOSD Dienst überhaupt aktiv ist, bevor wir reloaden
+if systemctl --user is-active --quiet swayosd-libinput-backend.service || pgrep -x "swayosd-server" > /dev/null; then
+    swayosd-client --reload-style >> "$LOG_FILE" 2>&1
+else
+    echo "⚠️ SwayOSD Server nicht erreichbar - überspringe Reload." >> "$LOG_FILE"
+fi
+
 echo "--- Log Ende ---" >> "$LOG_FILE"
