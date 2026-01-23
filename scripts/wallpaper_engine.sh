@@ -5,53 +5,42 @@ WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 LOG_FILE="$HOME/waybar_error.log"
 
-# Log-Datei komplett leeren und neu starten
-echo "--- NEUSTART LOG: $(date) ---" > "$LOG_FILE"
+echo "--- LAPTOP BOOT LOG: $(date) ---" > "$LOG_FILE"
 
-# 1. Bild wählen
+# 1. Wallpaper sofort (das funktioniert meist ohne Probleme)
 WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)
-if [ -z "$WALLPAPER" ]; then
-    echo "❌ Fehler: Keine Bilder gefunden!" >> "$LOG_FILE"
-    exit 1
-fi
-
-# 2. Hintergrund & Farben
-echo "🖼️ Setze Wallpaper: $WALLPAPER" >> "$LOG_FILE"
 swww-daemon &> /dev/null &
-sleep 1
+sleep 2
 swww img "$WALLPAPER" --transition-type wipe >> "$LOG_FILE" 2>&1
 wal -i "$WALLPAPER" >> "$LOG_FILE" 2>&1
-
-# 3. Pfade fixen
 sed -i "s|__HOME__|$HOME|g" "$WAYBAR_STYLE" 2>> "$LOG_FILE"
 
-# 4. DIE SCHLEIFE (Das muss im Log auftauchen!)
-echo "🔄 Starte Waybar-Überwachung..." >> "$LOG_FILE"
+# 2. Die Waybar-Schleife (Hintergrund-Prozess)
+(
+    for i in {1..20}; do
+        echo "🚀 Versuch $i: Starte Waybar..." >> "$LOG_FILE"
 
-for i in {1..10}; do
-    echo "-------------------------------------" >> "$LOG_FILE"
-    echo "🚀 STARTVERSUCH NR. $i um $(date)" >> "$LOG_FILE"
+        # Tastatur-Layout auf Deutsch erzwingen
+        hyprctl keyword input:kb_layout de >> "$LOG_FILE" 2>&1
 
-    # Radikal aufräumen
-    killall -9 waybar 2>/dev/null
-    sleep 2
+        # Radikal aufräumen
+        killall -9 waybar 2>/dev/null
+        sleep 2
 
-    # Tastatur erzwingen
-    hyprctl keyword input:kb_layout de >> "$LOG_FILE" 2>&1
+        # Waybar starten
+        waybar 2>> "$LOG_FILE" &
 
-    # WAYBAR START (Wichtig: mit nohup und disown, damit das Skript nicht mitstirbt)
-    nohup waybar >> "$LOG_FILE" 2>&1 &
+        # 8 Sekunden warten: Bleibt sie offen?
+        sleep 8
 
-    # Dem System Zeit geben, die Broken Pipe zu werfen
-    sleep 10
+        if pgrep -x "waybar" > /dev/null; then
+            echo "✅ ERFOLG: Waybar läuft nach Versuch $i!" >> "$LOG_FILE"
+            exit 0
+        fi
 
-    if pgrep -x "waybar" > /dev/null; then
-        echo "✅ ERFOLG: Waybar läuft stabil in Versuch $i!" >> "$LOG_FILE"
-        # Wir sind fertig, beende die Schleife
-        break
-    else
-        echo "⚠️ FEHLSCHLAG: Versuch $i abgestürzt (Broken Pipe)." >> "$LOG_FILE"
-        echo "Versuche es in 5 Sekunden erneut..." >> "$LOG_FILE"
-        sleep 5
-    fi
-done
+        echo "⚠️ Versuch $i abgestürzt (Broken Pipe). Warte auf Treiber..." >> "$LOG_FILE"
+        sleep 3
+    done
+) &
+
+echo "✅ Skript im Hintergrund gestartet." >> "$LOG_FILE"
