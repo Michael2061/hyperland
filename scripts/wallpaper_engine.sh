@@ -1,25 +1,21 @@
 #!/bin/bash
 
-# Prüfen ob ein Bild übergeben wurde
-if [ -z "$1" ]; then
-    echo "Benutzung: ./wallpaper_engine.sh /pfad/zum/bild.jpg"
-    exit 1
-fi
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+# Zufälliges Bild wählen
+WALLPAPER=$(ls $WALLPAPER_DIR/*.jpg | shuf -n 1)
 
-WALLPAPER="$1"
-
-# 1. Wallpaper setzen (mit hyprpaper oder swww)
-# Wenn du hyprpaper nutzt, muss die config angepasst werden.
-# Hier als Beispiel mit swww (sehr beliebt für Animationen):
-swww img "$WALLPAPER" --transition-type center
-
-# 2. Farben mit pywal generieren
+# 1. Bild setzen & Farben generieren
+swww img "$WALLPAPER" --transition-type wipe
 wal -i "$WALLPAPER"
 
-# 3. Den Pfad-Fix für SwayOSD ausführen (damit __HOME__ ersetzt wird)
+# 2. DER TRICK FÜR HYPRLOCK:
+# Wir erstellen einen festen Link, den hyprlock immer finden kann
+ln -sf "$WALLPAPER" "$HOME/Pictures/Wallpapers/current_wallpaper.jpg"
+
+# 3. Pfade in den Styles fixen
+sed -i "s|__HOME__|$HOME|g" ~/.config/waybar/style.css
 sed -i "s|__HOME__|$HOME|g" ~/.config/swayosd/style.css
 
-# 4. SwayOSD befehlen, das Design neu zu laden
+# 4. Reloads
+killall -SIGUSR2 waybar
 swayosd-client --reload-style
-
-echo "🎨 Wallpaper und SwayOSD-Farben aktualisiert!"

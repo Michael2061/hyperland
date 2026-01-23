@@ -1,4 +1,4 @@
-@import "../../.cache/wal/colors-waybar.css";
+@import url("file://__HOME__/.cache/wal/colors-waybar.css");
 
 /* Jetzt kannst du in deinem CSS die Variablen nutzen, z.B.: */
 #workspaces button.active {

@@ -1,14 +1,18 @@
 {
     "layer": "top",
     "position": "top",
-    "output": ["DP-1", "DP-2", "DP-3"],
+    "height": 34,
+    "spacing": 4,
+    // Deckt deine 3 Desktop-Monitore und den Laptop ab
+    "output": ["DP-1", "DP-2", "DP-3", "eDP-1"],
     "margin-top": 8,
     "margin-left": 10,
     "margin-right": 10,
-    "spacing": 10,
-    "modules-left": ["custom/launch", "hyprland/workspaces", "network"],
-    "modules-center": ["custom/music"],
-    "modules-right": ["cpu", "memory", "pulseaudio", "tray", "clock"],
+
+    // Module-Anordnung für Ultrawide: Uhr in die Mitte!
+    "modules-left": ["custom/launch", "hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "cpu", "memory", "pulseaudio", "tray"],
 
     "hyprland/workspaces": {
         "format": "{name}",
@@ -16,31 +20,36 @@
         "all-outputs": false,
         "sort-by-number": true
     },
+
+    "hyprland/window": {
+        "format": "➜ {title}",
+        "separate-outputs": true
+    },
+
+    "clock": {
+        "format": "  {:%H:%M  |  %A, %d. %B}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
     "network": {
         "format-wifi": "  {bandwidthDownBits}",
         "format-ethernet": "󰈀  {bandwidthDownBits}",
         "interval": 2
     },
-    "custom/music": {
-        "format": "󰝚  {}",
-        "exec": "playerctl metadata --format '{{ title }} - {{ artist }}' || echo 'Silence'",
-        "interval": 5,
-        "on-click": "playerctl play-pause"
-    },
-    "clock": {
-        "format": " {:%H:%M} ",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
+
     "cpu": { "format": " {usage}%" },
     "memory": { "format": " {used}GB" },
+
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": { "default": ["", "", ""] }
     },
+
     "custom/launch": {
         "format": "󰈸",
         "on-click": "rofi -show drun"
     },
+
     "tray": { "spacing": 10 }
 }
