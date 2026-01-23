@@ -31,7 +31,7 @@ touch "$SWAYOSD_STYLE"
 sed -i "s|__HOME__|$HOME|g" "$WAYBAR_STYLE" 2>> "$LOG_FILE"
 sed -i "s|__HOME__|$HOME|g" "$SWAYOSD_STYLE" 2>> "$LOG_FILE"
 
-# 4. Waybar Neustart & Tastatur
+# 4. Waybar Neustart & Tastatur-Force
 echo "🔄 Initialisiere Waybar..." >> "$LOG_FILE"
 killall -9 waybar 2>/dev/null
 sleep 2
@@ -40,25 +40,30 @@ sleep 2
 if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
     hyprctl keyword input:kb_layout de >> "$LOG_FILE" 2>&1
     echo "⌨️ Tastatur auf DE gesetzt." >> "$LOG_FILE"
-else
-    echo "⚠️ Warnung: Keine Hyprland-Signatur gefunden!" >> "$LOG_FILE"
 fi
 
-# WAYBAR START (Wichtig: Wir fangen alle Fehlermeldungen ab)
-# Ersetze den letzten Teil deiner wallpaper_engine.sh
+# WAYBAR START MIT AUTOMATISCHEM RESTART BEI CRASH
 echo "🚀 Starte Waybar Prozess..." >> "$LOG_FILE"
-(waybar 2>> "$LOG_FILE" &)
 
-# Warte etwas länger, bevor wir SwayOSD ansprechen
+start_waybar() {
+    # Startet Waybar im Hintergrund und schreibt Fehler ins Log
+    (waybar 2>> "$LOG_FILE" &)
+}
+
+start_waybar
+
+# Wächter: Prüfen ob Waybar nach 5 Sekunden noch lebt
 sleep 5
-if pgrep -x "waybar" > /dev/null; then
-    echo "✅ Waybar läuft erfolgreich (PID: $(pgrep -x waybar))" >> "$LOG_FILE"
-else
-    echo "❌ Waybar ist direkt nach dem Start wieder abgestürzt!" >> "$LOG_FILE"
+if ! pgrep -x "waybar" > /dev/null; then
+    echo "⚠️ Waybar wegen Broken Pipe abgestürzt. Zweiter Versuch..." >> "$LOG_FILE"
+    # Nochmal Umgebungsvariablen auffrischen für diesen Prozess
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+    sleep 2
+    start_waybar
 fi
 
-# Prüfe erst, ob der SwayOSD Dienst überhaupt aktiv ist, bevor wir reloaden
-if systemctl --user is-active --quiet swayosd-libinput-backend.service || pgrep -x "swayosd-server" > /dev/null; then
+# SwayOSD Check
+if pgrep -x "swayosd-server" > /dev/null; then
     swayosd-client --reload-style >> "$LOG_FILE" 2>&1
 else
     echo "⚠️ SwayOSD Server nicht erreichbar - überspringe Reload." >> "$LOG_FILE"
