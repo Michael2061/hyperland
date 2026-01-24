@@ -42,7 +42,7 @@ background: transparent;
 }
 
 #network {
-color: @color4;
+color: #ff00ff;
 }
 
 #custom-music {
@@ -50,11 +50,12 @@ color: @color4;
 }
 
 #clock {
-color: @color2;
+color: @color2; /* Meistens ein helleres Lila/Blau */
+font-weight: bold;
 }
 
 #pulseaudio {
-color: @color5;
+color: #00ffff;
 }
 
 #memory {
@@ -62,7 +63,7 @@ color: @color6;
 }
 
 #cpu {
-color: @color3;
+color: #ff00ff;
 }
 
 #custom-launch {
