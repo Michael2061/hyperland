@@ -1,5 +1,7 @@
 /* --- FARBEN & IMPORTE --- */
 @import url("file:///home/__USER__/.cache/wal/colors-waybar.css");
+
+/* Rosie-Farben als Fallback, falls wal nicht lädt */
 @define-color rosie-red #e91e63;
 @define-color rosie-dark #880e4f;
 
@@ -9,27 +11,29 @@
   font-size: 14px;
   font-weight: bold;
   border: none;
-  border-radius: 0;
-  min-height: 0;
+  border-radius: 0; /* Keine Rundungen an den Modulen für maximale Stabilität */
   margin: 0;
   padding: 0;
+  min-height: 0;
 }
 
-/* --- DIE BAR (DYNAMISCH) --- */
+/* --- DIE BAR (VOLLSTÄNDIG) --- */
 window#waybar {
-  background: rgba(15, 15, 25, 0.8);
-  border: 2px solid @rosie-red;
-  border-radius: 12px;
+  background: rgba(15, 15, 25, 0.95); /* Dunkler, edler Hintergrund */
+  border-bottom: 2px solid @rosie-red;
   color: #ffffff;
-  /* Wir geben der ganzen Bar unten 10px "Leere", damit nichts aufsitzt */
-  padding-bottom: 10px;
+  /* Kein Padding hier, damit die Leiste bündig abschließt */
 }
 
-/* --- WORKSPACES --- */
+/* --- WORKSPACES (LINKS) --- */
+#workspaces {
+margin-left: 15px; /* Kleiner Abstand zum linken Rand */
+}
+
 #workspaces button {
 padding: 0 10px;
 color: #ffffff;
-margin-bottom: 5px;
+transition: all 0.3s ease;
 }
 
 #workspaces button.active {
@@ -38,52 +42,60 @@ background: rgba(255, 255, 255, 0.1);
 border-bottom: 3px solid @rosie-red;
 }
 
-/* --- NETZWERK FIX (ALLES ANZEIGEN) --- */
-#network {
-color: @rosie-red;
-/* WICHTIG: Keine min-width und keine max-width! */
-padding: 0 20px;
-margin-bottom: 10px;
-background: rgba(255, 255, 255, 0.05);
-border-radius: 8px;
+#workspaces button:hover {
+background: rgba(233, 30, 99, 0.2);
 }
 
-/* --- POWER BUTTON (DER "SICHERHEITS-ABSTAND") --- */
-#custom-power {
+/* --- MITTE (UHRZEIT) --- */
+#clock {
 color: #ffffff;
-background-color: @rosie-red; /* Wir geben ihm einen roten Hintergrund */
-font-size: 16px;
-
-/* Wir machen den Button zu einem festen Kreis */
-border-radius: 50%;
-min-width: 34px;
-min-height: 34px;
-
-/* Zentrierung des Icons im Kreis */
-margin-top: 8px;    /* Drückt den Kreis von oben weg */
-margin-bottom: 8px; /* Drückt den Kreis von unten weg */
-margin-right: 25px; /* Abstand zum rechten Rand der Bar */
-padding: 0;         /* Kein internes Padding, da wir zentrieren */
+padding: 0 15px;
 }
 
-#custom-power:hover {
-background-color: @rosie-dark;
-color: #ffffff;
-}
-
-/* --- RESTE (Stats & Co) --- */
-#cpu, #memory, #temperature, #pulseaudio, #clock, #tray {
+/* --- RECHTE MODULE (STATS & NETZWERK) --- */
+#cpu, #memory, #temperature, #pulseaudio, #network, #tray {
 padding: 0 12px;
-margin-bottom: 10px; /* Alles einheitlich hochziehen */
+margin: 5px 0; /* Vertikaler Abstand innerhalb der Bar */
 }
 
+/* Akzentuierung für die Stats */
 #cpu, #memory, #temperature {
 color: @rosie-red;
 background: rgba(255, 255, 255, 0.05);
-border-radius: 8px;
 }
 
-#clock {
+/* Netzwerk-Fix: Keine Begrenzung der Breite */
+#network {
+color: @rosie-red;
+border-bottom: 2px solid transparent;
+}
+
+/* --- DER POWER BUTTON (DER ABSCHLUSS RECHTS) --- */
+#custom-power {
+color: @rosie-red;
+font-size: 20px;
+/* WICHTIG: Viel Padding rechts, damit das Icon NIEMALS den Rand berührt */
+padding-left: 20px;
+padding-right: 30px;
+margin-right: 10px;
+transition: all 0.3s ease;
+}
+
+#custom-power:hover {
 color: #ffffff;
-border-bottom: 2px solid @rosie-red;
+background-color: @rosie-red;
+}
+
+/* --- SONSTIGES --- */
+#tray {
+margin-right: 10px;
+}
+
+#temperature.critical {
+color: #ff0000;
+animation: blink 0.5s alternate infinite;
+}
+
+@keyframes blink {
+  to { background-color: rgba(255, 0, 0, 0.5); }
 }
