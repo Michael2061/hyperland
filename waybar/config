@@ -1,11 +1,9 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 50,
+    "height": 60,
     "width": "auto",
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin": 0,
     "spacing": 0,
 
     "modules-left": [
@@ -22,34 +20,20 @@
     "modules-right": [
         "cpu",
         "memory",
-        "temperature",
         "pulseaudio",
         "network",
-        "tray",
-        "custom/power",
-        "custom/padding"
+        "tray"
     ],
 
     "custom/launcher": {
-        "format": " ", // Das CachyOS/Arch Icon
+        "format": " ",
         "on-click": "rofi -show drun",
         "tooltip": false
     },
 
     "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "active-only": false,
-        "on-click": "activate",
-        "format": "{icon}",
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "default": ""
-        }
+        "format": "{name}",
+        "on-click": "activate"
     },
 
     "custom/music": {
@@ -60,44 +44,22 @@
         "max-length": 30
     },
 
-    "cpu": { "format": "  {usage}%", "interval": 2 },
-    "memory": { "format": "  {}%", "interval": 2 },
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
-    },
-
-    "network": {
-        "format-wifi": "  {essid}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-ethernet": "󰈀 {bandwidthDownBytes}",
-        "interval": 2
-    },
-
-    "clock": {
-        "format": "  {:%H:%M  󰃭 %d.%m.%Y}"
-    },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 Muted",
-        "format-icons": { "default": ["", "", ""] },
-        "on-click": "pavucontrol"
-    },
-
     "custom/power": {
         "format": "⏻",
         "on-click": "wlogout",
         "tooltip": false
     },
 
-    "custom/padding": {
-        "format": " ",
-        "tooltip": false
+    "clock": {
+        "format": "  {:%H:%M}"
     },
 
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
-    }
+    "network": {
+        "format": "  {essid}",
+        "interval": 2
+    },
+
+    "cpu": { "format": "  {usage}%" },
+    "memory": { "format": "  {}%" },
+    "tray": { "spacing": 10 }
 }

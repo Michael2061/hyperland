@@ -1,15 +1,14 @@
-/* --- FARBEN --- */
 @import url("file:///home/__USER__/.cache/wal/colors-waybar.css");
 @define-color rosie-red #e91e63;
 
 * {
   font-family: "JetBrains Mono Nerd Font", sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
   border: none;
   border-radius: 0;
-  margin: 0;
-  padding: 0;
+  /* Verhindert das Abschneiden der Icons */
+  line-height: 0;
 }
 
 window#waybar {
@@ -18,18 +17,19 @@ window#waybar {
   color: #ffffff;
 }
 
-/* LINKS: Workspaces wieder sichtbar machen */
+/* Launcher Fix (Links) */
 #custom-launcher {
-font-size: 20px;
+font-size: 22px;
 color: @rosie-red;
-padding-left: 15px;
-padding-right: 15px;
+padding: 0 20px;
 }
 
+/* Workspaces Fix */
 #workspaces button {
-padding: 0 10px;
+padding: 0 12px;
 color: #ffffff;
-min-width: 30px;
+/* Zwingt die Buttons in die Mitte */
+margin: 10px 0;
 }
 
 #workspaces button.active {
@@ -37,37 +37,31 @@ color: @rosie-red;
 border-bottom: 3px solid @rosie-red;
 }
 
-#custom-music {
-color: @rosie-red;
-padding: 0 15px;
-margin-left: 10px;
-}
-
-/* MITTE */
-#clock {
-padding: 0 15px;
-}
-
-/* RECHTS */
-#cpu, #memory, #temperature, #pulseaudio, #network, #tray {
-padding: 0 12px;
-}
-
-/* DER POWER BUTTON FIX */
+/* --- DER POWER-BUTTON FIX (MITTE) --- */
 #custom-power {
 color: @rosie-red;
-font-size: 20px;
-/* Wir geben ihm massiv Platz nach rechts, um das Abschneiden zu verhindern */
-margin-right: 40px;
-padding-left: 15px;
-padding-right: 15px;
+font-size: 28px;      /* Schön groß */
+padding-right: 25px; /* Abstand zur Uhr */
+padding-left: 10px;
+/* Diese Kombination zentriert das Icon ohne es zu köpfen */
+margin-top: 0;
+margin-bottom: 0;
 }
 
-/* Das leere Spacer-Modul ganz rechts als zusätzlicher Schutz */
-#custom-padding {
+#clock {
+font-size: 18px;
 padding-right: 20px;
 }
 
-#cpu, #memory, #temperature {
+/* Rechte Seite */
+#cpu, #memory, #pulseaudio, #network, #tray, #custom-music {
+padding: 0 15px;
+}
+
+#tray {
+margin-right: 25px; /* Sicherheitsabstand zum Rand */
+}
+
+#custom-music {
 color: @rosie-red;
 }
