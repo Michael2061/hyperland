@@ -27,11 +27,13 @@ FOREGROUND=$(xrdb -query | grep 'foreground:' | awk '{print $2}')
 # 4. Waybar Farben direkt ersetzen (anhand deiner /* cX */ Markierungen)
 sed -i "s|__USER__|$USER|g" "$WAYBAR_STYLE"
 sed -i "s|__HOME__|$HOME|g" "$WAYBAR_STYLE"
-sed -i "s/color: #.* !important; \/\* c4 \*\//color: $COLOR4 !important; \/\* c4 \*\//" "$WAYBAR_STYLE"
-sed -i "s/color: #.* !important; \/\* c3 \*\//color: $COLOR3 !important; \/\* c3 \*\//" "$WAYBAR_STYLE"
-sed -i "s/color: #.* !important; \/\* c2 \*\//color: $COLOR2 !important; \/\* c2 \*\//" "$WAYBAR_STYLE"
-sed -i "s/color: #.* !important; \/\* c1 \*\//color: $COLOR1 !important; \/\* c1 \*\//" "$WAYBAR_STYLE"
-sed -i "s/color: #.* !important; \/\* c6 \*\//color: $COLOR6 !important; \/\* c6 \*\//" "$WAYBAR_STYLE"
+# 4. WAYBAR Farben direkt ersetzen
+# Wir löschen die alte Zeile und setzen sie komplett neu mit der Variable
+sed -i "s|color: .* !important; /\* c4 \*/|color: $COLOR4 !important; /* c4 */|" "$WAYBAR_STYLE"
+sed -i "s|color: .* !important; /\* c3 \*/|color: $COLOR3 !important; /* c3 */|" "$WAYBAR_STYLE"
+sed -i "s|color: .* !important; /\* c2 \*/|color: $COLOR2 !important; /* c2 */|" "$WAYBAR_STYLE"
+sed -i "s|color: .* !important; /\* c1 \*/|color: $COLOR1 !important; /* c1 */|" "$WAYBAR_STYLE"
+sed -i "s|color: .* !important; /\* c6 \*/|color: $COLOR6 !important; /* c6 */|" "$WAYBAR_STYLE"
 
 # 5. DER FIX FÜR SWAYOSD & HYPRLOCK (Hier einfügen!)
 echo "🎨 Passe SwayOSD & Hyprlock Pfade an..."
