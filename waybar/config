@@ -1,15 +1,24 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 44,
+    "height": 55, // Erhöht auf 55 gegen das Abschneiden
     "margin-top": 10,
     "margin-left": 15,
     "margin-right": 15,
     "spacing": 10,
 
-    "modules-left": ["custom/launch", "hyprland/workspaces", "network"],
+    "modules-left": ["custom/launch", "hyprland/workspaces"],
     "modules-center": ["custom/music"],
-    "modules-right": ["cpu", "memory", "pulseaudio", "tray", "clock", "custom/power"],
+    "modules-right": [
+        "cpu#per-core",
+        "memory",
+        "temperature",
+        "pulseaudio",
+        "network",
+        "clock",
+        "tray",
+        "custom/power"
+    ],
 
     "hyprland/workspaces": {
         "format": "{name}",
@@ -25,9 +34,6 @@
         "format-disconnected": "󰖪  Disconnected",
         "interval": 2,
         "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
 
@@ -41,13 +47,21 @@
     },
 
     "memory": {
-        "format": "󰍛 {used}GB",
+        "format": "  {used:0.1f}G/{total:0.1f}G",
+        "tooltip-format": "{percentage}% genutzt",
         "interval": 5
     },
 
-    "cpu": {
-        "format": " {usage}%",
-        "interval": 5
+    "cpu#per-core": {
+        "format": "  {usage}%",
+        "on-click": "kitty --class float_kitty btop",
+        "interval": 2
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", "", "", ""]
     },
 
     "pulseaudio": {

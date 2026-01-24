@@ -14,8 +14,8 @@
 }
 
 window#waybar {
-  background: rgba(15, 15, 25, 0.8); /* Dunkler, transparenter Hintergrund */
-  border: 2px solid @rosie-red;    /* Rahmen in Rosie-Rot statt @color2 */
+  background: rgba(15, 15, 25, 0.8);
+  border: 2px solid @rosie-red;
   border-radius: 12px;
   color: #ffffff;
 }
@@ -23,7 +23,6 @@ window#waybar {
 #workspaces button {
 padding: 0 8px;
 color: #ffffff;
-background: transparent;
 }
 
 #workspaces button.active {
@@ -32,63 +31,60 @@ background: rgba(255, 255, 255, 0.1);
 border-bottom: 3px solid @rosie-red;
 }
 
-#workspaces button:hover {
-background: rgba(255, 255, 255, 0.2);
-box-shadow: inherit;
-text-shadow: inherit;
-}
-
-/* Module Styling */
-#network, #custom-music, #cpu, #memory, #pulseaudio, #clock, #tray, #custom-launch {
-padding: 0 15px;
-margin: 4px 0;
-background: transparent;
-}
-
-#network {
+/* --- STATS MODULE (CPU, RAM, TEMP) --- */
+#cpu, #memory, #temperature {
 color: @rosie-red;
-}
-
-#custom-music {
-color: @rosie-red;
-}
-
-#pulseaudio {
-color: #ffffff; /* Weißer Kontrast für Lautstärke */
-}
-
-#cpu {
-color: @rosie-dark;
+background: rgba(255, 255, 255, 0.05);
+border-radius: 8px;
+margin: 4px 2px;
+padding: 0 10px;
 }
 
 #memory {
-color: @rosie-dark;
+color: #ffffff; /* Weiß für bessere Lesbarkeit der Zahlen */
+border-bottom: 2px solid @rosie-dark;
+}
+
+#temperature.critical {
+color: #ff0000;
+animation-name: blink;
+animation-duration: 0.5s;
+animation-direction: alternate;
+animation-iteration-count: infinite;
+}
+
+/* --- STANDARD MODULE --- */
+#network, #custom-music, #pulseaudio, #clock, #tray, #custom-launch {
+padding: 0 12px;
+margin: 4px 0;
+}
+
+#network, #custom-music, #custom-launch {
+color: @rosie-red;
 }
 
 #clock {
 color: #ffffff;
-font-weight: bold;
-border-bottom: 2px solid @rosie-red; /* Der rote Akzent-Strich unter der Uhr */
+border-bottom: 2px solid @rosie-red;
 }
 
-#custom-launch {
-font-size: 18px;
-color: @rosie-red;
-margin-left: 5px;
-}
-
-#tray {
-color: #ffffff;
-}
-
+/* --- POWER BUTTON FIX --- */
 #custom-power {
-color: @rosie-red; /* Unser schönes Rosie-Rot */
-font-size: 20px;
+color: @rosie-red;
+font-size: 18px; /* Etwas kleiner für Stabilität */
 padding-right: 15px;
 padding-left: 10px;
+margin-top: 0;
+margin-bottom: 0;
+vertical-align: middle;
 }
 
 #custom-power:hover {
 color: #ffffff;
-text-shadow: 0 0 10px @rosie-red; /* Ein leichter Glüheffekt */
+}
+
+@keyframes blink {
+  to {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
 }
