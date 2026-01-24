@@ -1,0 +1,71 @@
+* {
+    /* Rosie Farbpalette */
+    bg-col:  #1e1e2e;           /* Dunkler Hintergrund */
+    bg-col-light: #2e2e3e;
+    border-col: #e91e63;       /* Das Rosie-Rot */
+    selected-col: #e91e63;
+    text-col: #ffffff;
+    main-fg: #f38ba8;          /* Ein helleres Pink für Akzente */
+
+    width: 600;
+    font: "JetBrains Mono 12";
+}
+
+window {
+    height: 360px;
+    border: 3px;
+    border-color: @border-col;
+    background-color: @bg-col;
+    border-radius: 12px;
+}
+
+mainbox {
+    background-color: @bg-col;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @bg-col;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @border-col;
+    padding: 6px;
+    text-color: @bg-col;
+    border-radius: 3px;
+    margin: 20px 0px 0px 20px;
+}
+
+entry {
+    padding: 6px;
+    margin: 20px 0px 0px 10px;
+    text-color: @text-col;
+    background-color: @bg-col;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 0px 0px 20px;
+    columns: 2;
+    lines: 5;
+    background-color: @bg-col;
+}
+
+element {
+    padding: 5px;
+    background-color: @bg-col;
+    text-color: @text-col;
+}
+
+element-icon {
+    size: 25px;
+}
+
+element selected {
+    background-color:  @selected-col;
+    text-color: @bg-col;
+    border-radius: 3px;
+}
