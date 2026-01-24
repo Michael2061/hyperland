@@ -42,28 +42,28 @@ background: transparent;
 }
 
 #network {
-color: #ff00ff;
+color: #e91e63;
 }
 
 #custom-music {
-color: @color4;
+color: #e91e63;
 }
 
 #clock {
-color: @color2; /* Meistens ein helleres Lila/Blau */
+color: #ffffff;
 font-weight: bold;
 }
 
 #pulseaudio {
-color: #00ffff;
+color: #ffffff;
 }
 
 #memory {
-color: @color6;
+color: #c2185b;
 }
 
 #cpu {
-color: #ff00ff;
+color: #880e4f;
 }
 
 #custom-launch {
