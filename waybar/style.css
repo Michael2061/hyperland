@@ -35,9 +35,9 @@ border-bottom: 3px solid @rosie-red;
 
 /* 2. Gemeinsames Styling für ALLE Module (Fix für Margins) */
 #network, #cpu, #memory, #temperature, #pulseaudio, #clock, #tray, #custom-power, #custom-music, #custom-launch {
-padding: 0 10px;
-margin-top: 2px;    /* Kleinerer Wert oben damit nichts anstößt */
-margin-bottom: 2px; /* Kleinerer Wert unten damit nichts abgeschnitten wird */
+padding: 0 15px;    /* Erhöht von 10 auf 15 für mehr inneren Abstand */
+margin-top: 5px;    /* Etwas mehr Platz nach oben */
+margin-bottom: 5px; /* Etwas mehr Platz nach unten */
 }
 
 /* 3. Spezielles Styling für Stats (Hintergrund-Schimmer) */
@@ -67,6 +67,8 @@ animation-iteration-count: infinite;
 color: @rosie-red;
 margin-top: 0;
 margin-bottom: 0;
+min-width: 120px; /* Verhindert das Flackern bei wechselnden Speed-Werten */
+padding: 0 15px;  /* Gibt dem Text innen genug Platz */
 }
 
 #custom-music, #custom-launch {
@@ -85,12 +87,10 @@ color: #ffffff;
 /* 5. Finaler Power Button Fix */
 #custom-power {
 color: @rosie-red;
-font-size: 18px; /* Etwas kleiner für die Stabilität */
-padding-right: 15px;
-padding-left: 10px;
-margin-top: 0;
-margin-bottom: 0;
-vertical-align: middle;
+font-size: 18px;
+padding-left: 20px;  /* Mehr Abstand zum Tray hin */
+padding-right: 10px; /* Kleiner Puffer zum Bar-Ende */
+margin-right: 5px;   /* Zusätzlicher Sicherheitsabstand */
 }
 
 #custom-power:hover {
