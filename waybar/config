@@ -3,19 +3,11 @@
     "position": "top",
     "height": 50,
     "margin-top": 8,
-    "margin-left": 10,
-    "margin-right": 10,
     "spacing": 10,
 
     "modules-left": ["custom/launch", "hyprland/workspaces", "network"],
     "modules-center": ["custom/music"],
     "modules-right": ["cpu", "memory", "pulseaudio", "tray", "clock"],
-
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "on-click": "activate",
-        "all-outputs": true
-    },
 
     "network": {
         "format-wifi": "  {bandwidthDownBits}",
@@ -32,19 +24,14 @@
         "max-length": 50
     },
 
-    "cpu": {
-        "format": " {usage}%"
-    },
-
-    "memory": {
-        "format": "󰍛 {used}GB"
-    },
+    "cpu": { "format": " {usage}%" },
+    "memory": { "format": " {used}GB" }, // DOPPELT!
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-muted": "󰝟",
         "format-icons": { "default": ["", "", ""] }
-    },
+    } // DOPPELT!,
 
     "clock": {
         "format": "{:%H:%M}",
