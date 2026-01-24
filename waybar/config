@@ -9,14 +9,33 @@
     "modules-center": ["custom/music"],
     "modules-right": ["cpu", "memory", "pulseaudio", "tray", "clock"],
 
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "all-outputs": true
+    },
+
     "network": {
         "format-wifi": "  {bandwidthDownBits}",
         "format-ethernet": "󰈀  {bandwidthDownBits}",
         "interval": 2
     },
 
+    "custom/music": {
+        "format": "󰝚  {}",
+        "escape": true,
+        "interval": 5,
+        "exec": "playerctl metadata --format '{{ title }}' 2>/dev/null || echo 'Kein Player aktiv'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+
     "memory": {
         "format": "󰍛 {used}GB"
+    },
+
+    "cpu": {
+        "format": " {usage}%"
     },
 
     "pulseaudio": {
@@ -30,19 +49,12 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
-    "cpu": { "format": " {usage}%" },
-    "memory": { "format": " {used}GB" },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
-        "format-icons": { "default": ["", "", ""] }
-    },
-
     "custom/launch": {
         "format": "󰈸",
         "on-click": "rofi -show drun"
     },
 
-    "tray": { "spacing": 10 }
+    "tray": {
+        "spacing": 10
+    }
 }
