@@ -1,16 +1,14 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 55,
-    "width": "auto", // Nutzt die volle Monitorbreite
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "spacing": 10,
+    "height": 50,
+    "width": "auto",
+    "margin": 0,
+    "spacing": 0,
 
-    // Hier legen wir fest, was links, mittig und rechts steht
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "custom/music"
     ],
 
     "modules-center": [
@@ -27,61 +25,59 @@
         "custom/power"
     ],
 
-    // --- MODUL DEFINITIONEN ---
-
     "hyprland/workspaces": {
-        "format": "{name}",
-        "on-click": "activate"
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "default": "",
+            "active": "",
+            "urgent": ""
+        }
     },
 
-    "cpu": {
-        "format": "  {usage}%",
-        "interval": 2
+    "custom/music": {
+        "format": "󰝚  {}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "hyprctl dispatch exec [float;size 800 500] ncspot"
     },
 
-    "memory": {
-        "format": "  {}%",
-        "interval": 2
-    },
-
+    "cpu": { "format": "  {usage}%", "interval": 2 },
+    "memory": { "format": "  {}%", "interval": 2 },
     "temperature": {
         "critical-threshold": 80,
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
 
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 Muted",
-        "format-icons": {
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-
     "network": {
-        "format-wifi": "  {essid}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-ethernet": "󰈀 {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "󰤮 Disconnected",
-        "tooltip-format-wifi": "Signal: {signalStrength}%",
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀 {bandwidthDownBytes}",
         "interval": 2
-        // KEIN max-length, damit dein Name "Michael..." voll angezeigt wird
     },
 
     "clock": {
-        "format": "  {:%H:%M  󰃭 %d.%m.%Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "  {:%H:%M  󰃭 %d.%m.%Y}"
     },
 
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "pavucontrol"
     },
 
     "custom/power": {
         "format": "⏻",
         "on-click": "wlogout",
         "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
     }
 }
