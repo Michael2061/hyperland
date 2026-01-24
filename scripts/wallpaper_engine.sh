@@ -53,3 +53,16 @@ killall waybar 2>/dev/null
 sleep 0.5
 
 waybar -c "$WAYBAR_CONFIG" -s "$WAYBAR_STYLE" &
+
+# 4. SDDM (LOGIN SCREEN) AKTUALISIEREN
+# Wir kopieren das aktuelle Bild über das "Standard-Bild" von SDDM
+sudo cp "$WALLPAPER" /usr/share/sddm/themes/sugar-candy/Backgrounds/current_bg.jpg
+
+# Wir setzen die Farben in einer separaten User-Konfig, damit die Hauptdatei sauber bleibt
+SDDM_USER_CONF="/usr/share/sddm/themes/sugar-candy/theme.conf.user"
+echo "[General]
+background=Backgrounds/current_bg.jpg
+mainColor=\"$COLOR4\"
+accentColor=\"$COLOR4\"
+faceColor=\"$COLOR0\"
+fontColor=\"$FOREGROUND\"" | sudo tee "$SDDM_USER_CONF" > /dev/null
