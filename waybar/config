@@ -9,11 +9,13 @@
     "spacing": 0,
 
     "modules-left": [
+        "custom/launcher",
         "hyprland/workspaces",
         "custom/music"
     ],
 
     "modules-center": [
+        "custom/power",
         "clock"
     ],
 
@@ -27,6 +29,12 @@
         "custom/power",
         "custom/padding"
     ],
+
+    "custom/launcher": {
+        "format": " ", // Das CachyOS/Arch Icon
+        "on-click": "rofi -show drun",
+        "tooltip": false
+    },
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -46,12 +54,10 @@
 
     "custom/music": {
         "format": "󰝚  {}",
-        "escape": true,
-        "return-type": "json",
-        "max-length": 40,
         "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "return-type": "json",
         "on-click": "playerctl play-pause",
-        "on-click-right": "hyprctl dispatch exec [float;size 800 500] ncspot"
+        "max-length": 30
     },
 
     "cpu": { "format": "  {usage}%", "interval": 2 },

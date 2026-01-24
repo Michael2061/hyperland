@@ -19,9 +19,11 @@ window#waybar {
 }
 
 /* LINKS: Workspaces wieder sichtbar machen */
-#workspaces {
-margin-left: 10px;
-padding-left: 10px;
+#custom-launcher {
+font-size: 20px;
+color: @rosie-red;
+padding-left: 15px;
+padding-right: 15px;
 }
 
 #workspaces button {
