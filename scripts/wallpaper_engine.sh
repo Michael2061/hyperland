@@ -55,14 +55,26 @@ sleep 0.5
 waybar -c "$WAYBAR_CONFIG" -s "$WAYBAR_STYLE" &
 
 # 4. SDDM (LOGIN SCREEN) AKTUALISIEREN
-# Wir kopieren das aktuelle Bild über das "Standard-Bild" von SDDM
+echo "🌙 Synchronisiere SDDM mit Rosie-Design..."
+
+# 5. Das aktuelle Hintergrundbild kopieren
 sudo cp "$WALLPAPER" /usr/share/sddm/themes/sugar-candy/Backgrounds/current_bg.jpg
 
-# Wir setzen die Farben in einer separaten User-Konfig, damit die Hauptdatei sauber bleibt
+# 6. Die Farben und das Profilbild-Setting in die .user Datei schreiben
 SDDM_USER_CONF="/usr/share/sddm/themes/sugar-candy/theme.conf.user"
+sudo cp "$WALLPAPER" /usr/share/sddm/themes/sugar-candy/Backgrounds/current_bg.jpg
+
 echo "[General]
 background=Backgrounds/current_bg.jpg
 mainColor=\"$COLOR4\"
-accentColor=\"$COLOR4\"
-faceColor=\"$COLOR0\"
-fontColor=\"$FOREGROUND\"" | sudo tee "$SDDM_USER_CONF" > /dev/null
+accentColor=\"$COLOR1\"
+faceColor=\"$COLOR2\"
+fontColor=\"$FOREGROUND\"
+selectionColor=\"$COLOR4\"
+HourFormat=\"HH:mm\"
+DateFormat=\"dddd, d. MMMM yyyy\"
+DateFontSize=22
+HourFontSize=64
+showRoundUserIcon=true
+borderWidth=3
+font=\"JetBrains Mono Nerd Font\"" | sudo tee "$SDDM_USER_CONF" > /dev/null

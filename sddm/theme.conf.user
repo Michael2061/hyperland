@@ -1,4 +1,22 @@
 [General]
+# Hintergrund & Farben
 background=Backgrounds/current_bg.jpg
 mainColor=#e91e63
 accentColor=#e91e63
+fontColor=#ffffff
+selectionColor=#e91e63
+
+# Uhr & Datum
+HourFormat="HH:mm"
+DateFormat="dddd, d. MMMM yyyy"
+DateFontSize=22
+HourFontSize=64
+
+# Benutzer-Icon (Rosie)
+showRoundUserIcon=true
+borderWidth=3
+FacesDir=/usr/share/sddm/faces
+
+# Layout
+ScreenAlign="center"
+font="JetBrains Mono Nerd Font"
