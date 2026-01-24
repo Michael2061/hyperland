@@ -51,18 +51,17 @@ border-radius: 8px;
 /* --- POWER BUTTON (DER "SICHERHEITS-ABSTAND") --- */
 #custom-power {
 color: @rosie-red;
-font-size: 22px;      /* Schön groß */
-/* Wir geben dem Button extrem viel Platz nach rechts innerhalb der Bar */
-padding-left: 20px;
-padding-right: 50px;
-/* Wir ziehen ihn aktiv 10 Pixel hoch */
-margin-top: -10px;
-margin-bottom: 10px;
+font-size: 20px;
+/*padding: Oben Rechts Unten Links */
+padding: 0 40px 0 20px;
+margin-right: 20px;     /* Schiebt die Box vom Rand weg */
+margin-bottom: 8px;     /* Zieht das Icon nach oben */
+transition: all 0.3s ease;
 }
 
 #custom-power:hover {
 color: #ffffff;
-background: rgba(233, 30, 99, 0.3);
+background: rgba(233, 30, 99, 0.2);
 border-radius: 10px;
 }
 
