@@ -1,4 +1,5 @@
 /* Importiert die Farben von deinem Wallpaper (Pywal) */
+/* VERGISS NICHT: Ersetze __USER__ durch deinen echten Namen! */
 @import url("file:///home/__USER__/.cache/wal/colors-waybar.css");
 
 /* Deine feste Lieblingsfarbe */
@@ -15,21 +16,69 @@
 }
 
 window#waybar {
-  /* Nutzt die Hintergrundfarbe von Pywal mit Transparenz */
   background: rgba(15, 15, 25, 0.9);
   border: 2px solid @rosie-red;
   border-radius: 12px;
-  color: @foreground; /* Nutzt die Textfarbe von Pywal */
+  color: @foreground;
 }
 
-/* CachyOS Logo - Nutzt Farbe 4 von Pywal für Abwechslung */
+/* --- ROSIE-RED MODULE (LOGO, MUSIK, UHR, NETZWERK, POWER) --- */
+
 #custom-launcher {
-color: @rosie-red;
+color: @rosie-red !important;
 font-size: 18px;
 margin-left: 10px;
+text-shadow: 0 0 5px rgba(233, 30, 99, 0.5);
 }
 
-/* Workspaces */
+#custom-music, #custom-music label {
+color: @rosie-red !important;
+background: rgba(233, 30, 99, 0.1);
+border-radius: 8px;
+margin: 5px 2px;
+padding: 0 12px;
+}
+
+#clock, #clock label {
+color: @rosie-red !important;
+background: rgba(233, 30, 99, 0.1);
+border-radius: 8px;
+margin: 5px 2px;
+padding: 0 12px;
+}
+
+#network, #network label {
+color: @rosie-red !important;
+padding: 0 10px;
+}
+
+#custom-power {
+color: @rosie-red !important;
+font-size: 20px;
+margin-right: 15px;
+text-shadow: 0 0 5px rgba(233, 30, 99, 0.5);
+}
+
+#custom-power:hover {
+color: #ffffff !important;
+background: @rosie-red;
+border-radius: 8px;
+}
+
+/* --- PYWAL MODULE (CPU, RAM, AUDIO) --- */
+
+#cpu { color: @color1; }
+#memory { color: @color2; }
+#pulseaudio { color: @color5; }
+
+/* Gemeinsame Abstände für die rechte Seite */
+#cpu, #memory, #network, #pulseaudio {
+padding: 0 8px;
+margin: 0 2px;
+}
+
+/* --- WORKSPACES & TRAY --- */
+
 #workspaces button {
 padding: 0 8px;
 color: @foreground;
@@ -38,52 +87,6 @@ color: @foreground;
 #workspaces button.active {
 color: @rosie-red;
 border-bottom: 2px solid @rosie-red;
-}
-
-/* Mitte: Musik & Uhr */
-#custom-music {
-color: @rosie-red;
-background: rgba(233, 30, 99, 0.1);
-border-radius: 8px;
-margin: 5px 2px;
-padding: 0 12px;
-}
-
-#clock {
-color: @rosie-red;
-background: rgba(233, 30, 99, 0.1); /* Leichter roter Schimmer im Hintergrund */
-border-radius: 8px;
-margin: 5px 2px;
-padding: 0 12px;
-}
-
-/* Rechts: System-Infos nutzen die bunte Palette von Pywal */
-#cpu { color: @color1; }
-#memory { color: @color2; }
-
-#network {
-color: @rosie-red;
-padding: 0 10px;
-}
-
-#pulseaudio { color: @color5; }
-
-#cpu, #memory, #network, #pulseaudio {
-padding: 0 8px;
-margin: 0 2px;
-}
-
-/* Power Button - Ganz rechts mit deinem Fix */
-#custom-power {
-color: @rosie-red;
-font-size: 20px;
-margin-right: 15px;
-}
-
-#custom-power:hover {
-color: #ffffff;
-background: @rosie-red;
-border-radius: 8px;
 }
 
 #tray {
