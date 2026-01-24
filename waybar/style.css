@@ -50,19 +50,25 @@ border-radius: 8px;
 
 /* --- POWER BUTTON (DER "SICHERHEITS-ABSTAND") --- */
 #custom-power {
-color: @rosie-red;
-font-size: 20px;
-/*padding: Oben Rechts Unten Links */
-padding: 0 40px 0 20px;
-margin-right: 20px;     /* Schiebt die Box vom Rand weg */
-margin-bottom: 8px;     /* Zieht das Icon nach oben */
-transition: all 0.3s ease;
+color: #ffffff;
+background-color: @rosie-red; /* Wir geben ihm einen roten Hintergrund */
+font-size: 16px;
+
+/* Wir machen den Button zu einem festen Kreis */
+border-radius: 50%;
+min-width: 34px;
+min-height: 34px;
+
+/* Zentrierung des Icons im Kreis */
+margin-top: 8px;    /* Drückt den Kreis von oben weg */
+margin-bottom: 8px; /* Drückt den Kreis von unten weg */
+margin-right: 25px; /* Abstand zum rechten Rand der Bar */
+padding: 0;         /* Kein internes Padding, da wir zentrieren */
 }
 
 #custom-power:hover {
+background-color: @rosie-dark;
 color: #ffffff;
-background: rgba(233, 30, 99, 0.2);
-border-radius: 10px;
 }
 
 /* --- RESTE (Stats & Co) --- */
