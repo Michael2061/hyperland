@@ -24,7 +24,7 @@ window#waybar {
 
 /* CachyOS Logo - Nutzt Farbe 4 von Pywal für Abwechslung */
 #custom-launcher {
-color: @color4;
+color: @rosie-red;
 font-size: 18px;
 margin-left: 10px;
 }
@@ -50,36 +50,26 @@ padding: 0 12px;
 }
 
 #clock {
-color: @color7; /* Eine helle Farbe aus deinem Wallpaper */
-background: rgba(255, 255, 255, 0.1);
+color: @rosie-red;
+background: rgba(233, 30, 99, 0.1); /* Leichter roter Schimmer im Hintergrund */
 border-radius: 8px;
 margin: 5px 2px;
 padding: 0 12px;
 }
 
 /* Rechts: System-Infos nutzen die bunte Palette von Pywal */
-#cpu {
-color: @color1;
-padding: 0 10px;
-}
-
-#memory {
-color: @color2;
-padding: 0 10px;
-}
+#cpu { color: @color1; }
+#memory { color: @color2; }
 
 #network {
-color: @color3;
+color: @rosie-red;
 padding: 0 10px;
 }
 
-#pulseaudio {
-color: @color5;
-padding: 0 10px;
-}
+#pulseaudio { color: @color5; }
 
 #cpu, #memory, #network, #pulseaudio {
-padding: 0 6px; /* Etwas weniger Padding, damit alles reinpasst */
+padding: 0 8px;
 margin: 0 2px;
 }
 
@@ -88,7 +78,6 @@ margin: 0 2px;
 color: @rosie-red;
 font-size: 20px;
 margin-right: 15px;
-padding: 0 5px;
 }
 
 #custom-power:hover {
