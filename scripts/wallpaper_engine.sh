@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Pfade
+# Pfade (Nutzen $HOME, damit es bei jedem User klappt)
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 LOG_FILE="$HOME/waybar_error.log"
 
-# 1. Log-Datei bei jedem Start NEU erstellen
-echo "--- System-Start: $(date) ---\" > "$LOG_FILE"
+# 1. Log-Datei neu erstellen
+echo "--- System-Start: $(date) ---" > "$LOG_FILE"
 
 # 2. Prüfen, ob das Skript bereits läuft
 if pgrep -x "wallpaper_engine.sh" | grep -qv $$; then
-    echo "Skript läuft bereits, breche ab." >> "$LOG_FILE"
+    echo "Skript läuft bereits." >> "$LOG_FILE"
     exit 1
 fi
 
@@ -21,17 +21,19 @@ sleep 0.5
 WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)
 
 if [ -z "$WALLPAPER" ]; then
-    echo "FEHLER: Kein Wallpaper gefunden in $WALLPAPER_DIR" >> "$LOG_FILE"
+    echo "FEHLER: Kein Bild in $WALLPAPER_DIR" >> "$LOG_FILE"
     exit 1
 fi
 
 swww img "$WALLPAPER" --transition-type wipe &
 wal -i "$WALLPAPER" -q
 
-# --- HIER IST DIE GEÄNDERTE ZEILE ---
-# Wir nutzen $USER (Systemvariable), um __USER__ im CSS zu ersetzen
+# --- DYNAMISCHE PFAD-ANPASSUNG ---
+# Wir suchen nach __USER__, __SUER__ oder __HOME__ und ersetzen es durch deinen echten Pfad
 sed -i "s|__USER__|$USER|g" "$WAYBAR_STYLE"
-# ------------------------------------
+sed -i "s|__SUER__|$USER|g" "$WAYBAR_STYLE"
+sed -i "s|__HOME__|$HOME|g" "$WAYBAR_STYLE"
+# --------------------------------
 
 # 4. Tastatur auf DE
 hyprctl keyword input:kb_layout de
@@ -40,4 +42,4 @@ hyprctl keyword input:kb_layout de
 killall waybar 2>/dev/null
 waybar &
 
-echo "Setup erfolgreich abgeschlossen: $WALLPAPER" >> "$LOG_FILE"
+echo "Setup erfolgreich für User $USER: $WALLPAPER" >> "$LOG_FILE"
