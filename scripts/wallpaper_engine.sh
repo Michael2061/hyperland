@@ -7,7 +7,7 @@ WAYBAR_CONFIG="$HOME/.config/waybar/config"
 
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 
-WALLPAPER="$HOME/Pictures/Wallpapers/rosie.jpg"
+WALLPAPER="$HOME/Pictures/Wallpapers/rosie.png"
 
 
 # 1. Prüfen, ob Rosie da ist
