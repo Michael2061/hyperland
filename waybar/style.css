@@ -5,6 +5,11 @@
 @define-color rosie-pink #e91e63;
 @define-color bg-glass rgba(30, 30, 46, 0.7);
 
+
+.rosie-text {
+  color: @rosie-pink !important;
+}
+
 /* Grundeinstellungen */
 * {
     font-family: "JetBrains Mono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
@@ -37,7 +42,7 @@ window#waybar {
 
 /* Ganz links: Launcher */
 #custom-launcher {
-    color: @rosie-pink;
+    color: @rosie-pink !important;
     padding: 0 15px;
 }
 
@@ -64,7 +69,7 @@ window#waybar {
 }
 
 #network {
-    color: @rosie-pink;
+    color: @rosie-pink !important;
     padding: 0 10px;
 }
 
@@ -74,7 +79,7 @@ window#waybar {
 }
 
 #custom-power {
-    color: @rosie-pink;
+    color: @rosie-pink !important;
     padding: 0 15px;
 }
 
