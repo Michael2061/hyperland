@@ -11,8 +11,8 @@
     "modules-center": ["custom/music", "clock"],
     "modules-right": ["cpu", "memory", "network", "pulseaudio", "tray", "custom/power"],
 
-    "custom/launcher": {
-        "format": "   ",
+   "custom/launcher": {
+        "format": "<span color='#e91e63'>   </span>",
         "on-click": "rofi -show drun -theme ~/.config/rofi/rosie.rasi",
         "tooltip": false
     },
@@ -49,10 +49,14 @@
     },
 
     "network": {
-        "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀  {ifname}",
-        "format-disconnected": "󰖪  Offline",
-        "interval": 5
+        "format-wifi": "<span color='#e91e63'> {essid} <small>󰇚 {bandwidthDownBits} 󰕒 {bandwidthUpBits}</small></span>",
+        "format-ethernet": "<span color='#e91e63'>󰈀 {ifname} <small>󰇚 {bandwidthDownBits} 󰕒 {bandwidthUpBits}</small></span>",
+        "format-disconnected": "<span color='#f44336'>󰖪 Offline</span>",
+        "interval": 2,
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signaldBm}dBm) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected"
     },
 
     "pulseaudio": {
@@ -62,7 +66,7 @@
     },
 
     "custom/power": {
-        "format": " ",
+        "format": "<span color='#e91e63'> </span>",
         "on-click": "wlogout",
         "tooltip": false
     }
