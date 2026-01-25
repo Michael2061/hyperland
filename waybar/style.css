@@ -1,43 +1,83 @@
-/* Dynamische Farben von Pywal */
-@import url("file:///home/__USER__/.cache/wal/colors-waybar.css");
+/* 1. Dynamische Farben von Pywal */
+@import url("file:///home/username/.cache/wal/colors-waybar.css");
 
-/* Deine Rosie-Theme Farben */
+/* 2. Deine festen Rosie-Theme Farben */
 @define-color rosie-pink #e91e63;
 @define-color bg-glass rgba(30, 30, 46, 0.7);
 
+/* Grundeinstellungen */
 * {
-  font-family: "JetBrains Mono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+    font-family: "JetBrains Mono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
 }
 
+/* Das Hauptfenster der Waybar */
 window#waybar {
-  background-color: @bg-glass;
-  border-radius: 15px;
-  border: 1px solid rgba(233, 30, 99, 0.3);
-  color: @foreground;
+    background-color: @bg-glass;
+    border-radius: 15px;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+    color: #ffffff;
 }
 
-/* Module in der Mitte (Musik & Uhr) */
-#custom-music, #clock {
-color: @rosie-pink;
-padding: 0 15px;
-font-weight: bold;
+/* Workspaces Fix */
+#workspaces button {
+    color: #ffffff;
+    padding: 0 5px;
 }
 
-/* Workspaces */
 #workspaces button.active {
-color: @rosie-pink;
-background-color: rgba(233, 30, 99, 0.2);
-border-radius: 10px;
-margin: 4px;
+    color: @rosie-pink;
+    background-color: rgba(233, 30, 99, 0.2);
+    border-radius: 10px;
 }
 
-/* Alle Icons (Links, Rechts, Mitte) einheitlich in Rosie-Pink */
-#cpu, #memory, #network, #pulseaudio, #custom-launcher, #custom-power, #custom-music, #clock {
-color: @rosie-pink;
-padding: 0 10px;
+/* --- ICONS & MODULE FARBEN (FIXED) --- */
+
+/* Ganz links: Launcher */
+#custom-launcher {
+    color: @rosie-pink;
+    padding: 0 15px;
+}
+
+/* Mitte: Musik & Uhr */
+#custom-music {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+#clock {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+/* Rechts: CPU, RAM, Netzwerk, Audio, Power */
+#cpu {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+#memory {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+#network {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+#pulseaudio {
+    color: @rosie-pink;
+    padding: 0 10px;
+}
+
+#custom-power {
+    color: @rosie-pink;
+    padding: 0 15px;
 }
 
 #tray {
-padding: 0 10px;
+    padding: 0 10px;
 }
