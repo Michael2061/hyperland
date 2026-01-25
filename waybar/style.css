@@ -18,12 +18,12 @@ window#waybar {
   background-color: @bg-glass;
   border-radius: 15px;
   border: 1px solid rgba(233, 30, 99, 0.3);
-  color: #ffffff;
+  color: @rosie-pink;
 }
 
 /* Workspaces */
 #workspaces button {
-color: #ffffff;
+color: @rosie-pink;
 padding: 0 5px;
 }
 
@@ -33,28 +33,40 @@ background-color: rgba(233, 30, 99, 0.2);
 border-radius: 10px;
 }
 
-/* --- ICONS & MODULE FARBEN (FORCE) --- */
-
-/* Wir färben die Labels (Text/Icons) in allen Modulen */
-#custom-launcher,
+/* --- STANDARD MODULE (Uhr, CPU, Musik etc.) --- */
+/* Diese behalten die normalen Abstände */
 #custom-music,
 #clock,
 #cpu,
 #memory,
-#network,
 #pulseaudio,
-#custom-power {
-color: @rosie-pink !important;
-padding: 0 10px;
-}
-
-/* Sicherheits-Selektor für die Icons in den Problem-Modulen */
-#custom-launcher label,
-#network label,
-#custom-power label {
-color: @rosie-pink !important;
-}
-
 #tray {
-padding: 0 10px;
+    color: @rosie-pink !important;
+    padding: 0 10px;
+}
+
+/* --- ROSIE MODUL FIX (Die Spezial-Behandlung) --- */
+
+/* 1. Launcher & Power Button (Zwingt das Icon Pink & etwas größer zu sein) */
+#custom-launcher, #custom-power {
+    color: @rosie-pink !important;
+    background-color: transparent; 
+    font-size: 18px; /* Sieht als "Startknopf" besser aus */
+    padding: 0 15px;
+}
+
+/* 2. Netzwerk Modul (Damit ALLES darin Pink ist) */
+#network {
+    color: @rosie-pink !important;
+    padding: 0 10px;
+}
+
+/* Das hier ist der wichtigste Teil für die Zahlen: */
+#network small {
+    color: @rosie-pink !important;
+}
+
+/* Sonderregel: Nur wenn Offline, dann Rot */
+#network.disconnected {
+    color: #f44336 !important;
 }
