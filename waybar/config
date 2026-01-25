@@ -1,75 +1,70 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 45, // Kompakt aber genug Platz
-    "margin-left": 10,
-    "margin-right": 10,
-    "margin-top": 5,
+    "height": 40,
+    "margin-left": 15,
+    "margin-right": 15,
+    "margin-top": 10,
+    "spacing": 5,
 
-    "modules-left": [
-        "custom/launcher",
-        "hyprland/workspaces"
-    ],
+    "modules-left": ["custom/launcher", "hyprland/workspaces"],
 
-    "modules-center": [
-        "custom/music",
-        "clock"
-    ],
+    "modules-center": ["custom/music", "clock"],
 
-    "modules-right": [
-        "cpu",
-        "memory",
-        "network",
-        "pulseaudio",
-        "tray",
-        "custom/power"
-    ],
+    "modules-right": ["cpu", "memory", "network", "pulseaudio", "tray", "custom/power"],
 
     "custom/launcher": {
-        "format": "   ", // Das CachyOS/Linux Symbol
-        "on-click": "rofi -show drun",
+        "format": "   ",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/rosie.rasi",
         "tooltip": false
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "all-outputs": false,
+        "sort-by-number": true
     },
 
     "custom/music": {
         "format": "󰝚  {} ",
         "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || echo 'Musik aus'",
         "interval": 1,
-        "max-length": 30
+        "on-click": "playerctl play-pause",
+        "max-length": 35
     },
 
     "clock": {
-        "interval": 60,
-        "format": "   {:%H:%M  󰃭  %d.%m.%Y} ", // %Y fügt das Jahr 2026 hinzu
+        "format": "  {:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "cpu": {
         "interval": 2,
-        "format": "   {usage}% ",
-        "tooltip": true // Im Tooltip stehen die Cores meistens trotzdem automatisch drin
+        "format": "  {usage}%",
+        "tooltip": true
     },
 
     "memory": {
         "interval": 2,
-        "format": "   {percentage}% ({total:0.1f}GiB) "
+        "format": "  {percentage}%"
     },
 
     "network": {
-        "interval": 2,
-        "format-wifi": "   {essid}  {bandwidthUpBytes}  {bandwidthDownBytes} ",
-        "format-ethernet": " 󰈀   {bandwidthUpBytes}  {bandwidthDownBytes} ",
-        "format-disconnected": " 󰖪  Offline "
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀  {ifname}",
+        "format-disconnected": "󰖪  Offline",
+        "interval": 5
     },
 
     "pulseaudio": {
-        "format": " {icon} {volume}% ",
-        "format-muted": " 󰝟 ",
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 ",
         "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] }
     },
 
     "custom/power": {
-        "format": " 󰐦  ", // Das Icon mit Leerzeichen wie von dir entdeckt!
+        "format": " ",
         "on-click": "wlogout",
         "tooltip": false
     }

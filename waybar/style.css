@@ -1,11 +1,9 @@
-/* 1. Dynamische Farben von Pywal (WICHTIG: Ganz oben!) */
+/* Dynamische Farben von Pywal */
 @import url("file:///home/__USER__/.cache/wal/colors-waybar.css");
 
-/* 2. Deine festen Rosie-Theme Farben */
+/* Deine Rosie-Theme Farben */
 @define-color rosie-pink #e91e63;
-@define-color rosie-light #ff4081;
-/* Wir können hier @color0 aus Pywal für den Hintergrund nutzen, falls gewünscht */
-@define-color bg-dark rgba(30, 30, 46, 0.8);
+@define-color bg-glass rgba(30, 30, 46, 0.7);
 
 * {
   font-family: "JetBrains Mono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
@@ -13,50 +11,33 @@
 }
 
 window#waybar {
-  background-color: @bg-dark; /* Hier kannst du auch @background nutzen */
-  border-bottom: 2px solid @rosie-pink;
-  color: @foreground; /* Nutzt Textfarbe von Pywal */
-  transition-property: background-color;
-  transition-duration: .5s;
+  background-color: @bg-glass;
+  border-radius: 15px;
+  border: 1px solid rgba(233, 30, 99, 0.3);
+  color: @foreground;
+}
+
+/* Module in der Mitte (Musik & Uhr) */
+#custom-music, #clock {
+color: @rosie-pink;
+padding: 0 15px;
+font-weight: bold;
 }
 
 /* Workspaces */
-#workspaces button {
-padding: 0 5px;
-background-color: transparent;
-color: @foreground;
-border-bottom: 3px solid transparent;
-}
-
 #workspaces button.active {
 color: @rosie-pink;
-border-bottom: 3px solid @rosie-pink;
-background-color: rgba(233, 30, 99, 0.1);
+background-color: rgba(233, 30, 99, 0.2);
+border-radius: 10px;
+margin: 4px;
 }
 
-#workspaces button:hover {
-background: rgba(233, 30, 99, 0.2);
-color: @rosie-light;
-}
-
-/* Icons & Module */
-#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight,
-#network, #pulseaudio, #wireplumber, #tray {
+/* Alle Icons (Links, Rechts, Mitte) einheitlich in Rosie-Pink */
+#cpu, #memory, #network, #pulseaudio, #custom-launcher, #custom-power, #custom-music, #clock {
+color: @rosie-pink;
 padding: 0 10px;
 }
 
-/* Diese Icons leuchten IMMER in Rosie-Pink, egal welches Wallpaper */
-#pulseaudio, #network, #cpu, #memory, #temperature, #clock {
-color: @rosie-pink;
-}
-
-/* Spezialfarben für Batterie */
-#battery.charging { color: #26A65B; }
-#battery.critical:not(.charging) {
-color: #f53c3c;
-animation-name: blink;
-animation-duration: 0.5s;
-animation-timing-function: linear;
-animation-iteration-count: infinite;
-animation-direction: alternate;
+#tray {
+padding: 0 10px;
 }
