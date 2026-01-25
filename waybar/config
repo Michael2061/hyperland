@@ -49,7 +49,7 @@
     },
 
     "network": {
-        "format-wifi": "  {essid} <small>󰇚 {bandwidthDownBits} 󰕒 {bandwidthUpBits}</small>",
+        "format-wifi": "  {essid} <small>󰇚 {bandwidthDownBits} 󰕒 {bandwidthUpBits}</small>",
         "format-ethernet": " 󰈀 {ifname} <small>󰇚 {bandwidthDownBits} 󰕒 {bandwidthUpBits}</small> ",
         "format-disconnected": "<span color='#f44336'>󰖪 Offline ",
         "interval": 2,
@@ -69,5 +69,10 @@
         "format": "  ",
         "on-click": "wlogout",
         "tooltip": false
-    }
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
 }
