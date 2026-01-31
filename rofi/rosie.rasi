@@ -13,12 +13,10 @@ configuration {
 @import "~/.cache/wal/colors-rofi-pywal.rasi"
 
 * {
-    /* Wir definieren die Farben fest aus dem Pywal-Import */
-    rosie-pink:   @color1;     /* Die Hauptfarbe (Pink) */
-    rosie-bg:     @background;  /* Der Hintergrund vom Wallpaper */
-    rosie-fg:     @foreground;  /* Die helle Vordergrundfarbe */
+    /* Wir nehmen die Farbe von Pywal, erzwingen aber volle Deckkraft */
+    rosie-pink:   @color1;
+    rosie-bg:     @background;
 
-    /* Wir erzwingen hier einen soliden Hintergrund ohne Transparenz */
     background-color: transparent;
     font: "JetBrainsMono Nerd Font 11";
 }
@@ -26,14 +24,19 @@ configuration {
 window {
     width: 650px;
     border: 3px;
-    border-color: @rosie-pink;   /* Dein Rosie-Pinker Rand */
-    background-color: @rosie-bg; /* Solider Hintergrund */
+    border-color: @rosie-pink;
+
+    /* FIX: Hier wird der Hintergrund absolut blickdicht gemacht */
+    background-color: @rosie-bg;
+    opacity: 1.0;
     border-radius: 12px;
 }
 
 mainbox {
     padding: 20px;
+    /* Auch hier sicherstellen, dass nichts durchscheint */
     background-color: @rosie-bg;
+    border-radius: 12px;
     children: [inputbar, listview];
 }
 
@@ -46,15 +49,13 @@ inputbar {
 prompt {
     padding: 8px 15px;
     background-color: @rosie-pink;
-    text-color: @rosie-bg;      /* Dunkler Text auf pinkem Grund */
+    text-color: #11111b; /* Dunkler Text auf Pink */
     border-radius: 8px;
 }
 
 entry {
     padding: 8px;
-    text-color: #ffffff;        /* ERZWUNGEN: Weißer Text beim Tippen */
-    placeholder: "Suchen...";
-    placeholder-color: #666666;
+    text-color: #ffffff; /* Weiße Schrift beim Tippen */
 }
 
 listview {
@@ -62,6 +63,7 @@ listview {
     lines: 8;
     spacing: 5px;
     fixed-height: true;
+    background-color: transparent;
 }
 
 element {
@@ -69,9 +71,9 @@ element {
     border-radius: 8px;
 }
 
-/* Fix für die Schriftfarbe in der Liste */
 element-text {
-    text-color: #ffffff;        /* ERZWUNGEN: Alle App-Namen in Weiß */
+    /* Erzwingt helle Schrift für bessere Lesbarkeit auf solidem Grund */
+    text-color: #ffffff;
     vertical-align: 0.5;
 }
 
@@ -81,10 +83,9 @@ element-icon {
 }
 
 element selected {
-    background-color: @rosie-pink; /* Wenn ausgewählt: Pinker Balken */
+    background-color: @rosie-pink;
 }
 
 element-text selected {
-    text-color: #000000;        /* Wenn ausgewählt: Schwarze Schrift auf Pink */
-    font: "JetBrainsMono Nerd Font Bold 11";
+    text-color: #000000; /* Schwarz auf Pink bei Auswahl */
 }
