@@ -6,86 +6,85 @@ configuration {
     display-drun: "   ";
 }
 
-/* Pywal Import für die dynamischen Farben */
+/* Pywal Import */
 @import "~/.cache/wal/colors-rofi-pywal.rasi"
 
 * {
-    /* Wir nutzen die Pywal-Variablen */
-    rosie-pink:   @color1;     /* Dein Pink */
-    rosie-bg:     @background;  /* Hintergrund von Pywal */
-    rosie-fg:     @foreground;  /* Vordergrund von Pywal */
-
-    /* Text-Sicherheit (Weiß für dunkle Hintergründe) */
-    text-white:   #ffffff;
-    text-black:   #11111b;
+    /* Wir erzwingen hier einen soliden, dunklen Hintergrund */
+    /* #11111b ist ein sehr edles, fast schwarzes Dunkelblau (Catppuccin Style) */
+    rosie-bg:     #11111b;
+    rosie-pink:   @color1;     /* Dein Pink von Pywal */
 
     background-color: transparent;
     font: "JetBrainsMono Nerd Font 11";
 }
 
 window {
-    width: 700px;              /* Etwas breiter für modernen Look */
+    width: 650px;
     border: 3px;
     border-color: @rosie-pink;
-    background-color: @rosie-bg;
-    border-radius: 16px;       /* Weichere Ecken */
+    background-color: @rosie-bg; /* Hier wird die Transparenz abgeschaltet */
+    border-radius: 12px;
 }
 
 mainbox {
-    padding: 30px;             /* Mehr Platz zum Rand */
+    padding: 20px;
+    background-color: @rosie-bg;
+    border-radius: 12px;
     children: [inputbar, listview];
 }
 
 inputbar {
-    margin: 0px 0px 20px 0px;
-    spacing: 15px;
+    margin: 0px 0px 15px 0px;
+    spacing: 10px;
+    background-color: transparent;
     children: [prompt, entry];
 }
 
 prompt {
-    padding: 10px 15px;
+    padding: 8px 12px;
     background-color: @rosie-pink;
-    text-color: @text-black;   /* Dunkler Text auf Pink */
-    border-radius: 10px;
+    text-color: #11111b;       /* Dunkler Text auf Pink */
+    border-radius: 8px;
 }
 
 entry {
-    padding: 10px;
-    text-color: @text-white;   /* Weißer Text für die Eingabe */
-    placeholder: "Was suchst du, Michael?";
-    placeholder-color: #666666;
+    padding: 8px;
+    text-color: #ffffff;       /* Immer weiße Schrift in der Suche */
+    placeholder: "Suchen...";
+    placeholder-color: #555555;
 }
 
 listview {
     columns: 1;
-    lines: 7;
-    spacing: 8px;              /* Mehr Abstand zwischen den Apps */
+    lines: 8;
+    spacing: 4px;
     background-color: transparent;
-    fixed-height: true;
 }
 
 element {
-    padding: 12px;             /* Größere Klickfläche */
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 8px;
     background-color: transparent;
 }
 
-/* --- WICHTIG: DER FIX FÜR DIE SCHRIFTFARBE --- */
+/* --- DER WICHTIGSTE TEIL FÜR DIE SCHRIFT --- */
 element-text {
-    text-color: @text-white;   /* Erzwingt weisse Schrift für die App-Namen */
+    text-color: #ffffff;       /* Erzwingt weisse Schrift */
+    background-color: transparent;
     vertical-align: 0.5;
 }
 
 element-icon {
-    size: 35px;                /* Schön große Icons */
-    padding: 0 15px 0 0;
+    size: 30px;
+    padding: 0 12px 0 0;
+    background-color: transparent;
 }
 
 element selected {
-    background-color: @rosie-pink; /* Pinker Balken bei Auswahl */
+    background-color: @rosie-pink;
 }
 
 element-text selected {
-    text-color: @text-black;   /* Text wird dunkel, wenn Balken pink ist */
-    font: "JetBrainsMono Nerd Font Bold 11";
+    text-color: #11111b;       /* Text wird dunkel auf pinkem Grund */
 }
