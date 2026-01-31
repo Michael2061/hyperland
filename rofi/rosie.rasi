@@ -3,77 +3,76 @@ configuration {
     show-icons: true;
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
-    display-drun: " 🔍 ";
+    display-drun: "   Apps ";
 }
 
-/* Pywal Import */
-@import "~/.cache/wal/colors-rofi-dark.rasi"
+/* Import der Pywal-Farben */
+@import "~/.cache/wal/colors-rofi-pywal.rasi"
 
 * {
-    /* Wir definieren die Farben fest basierend auf Pywal */
+    /* Farben aus Pywal [cite: 9] */
     rosie-bg:     @background;
     rosie-pink:   @color1;
     rosie-fg:     @foreground;
 
-    /* Falls Hintergrund zu dunkel/schwarz ist, nutzen wir eine leicht transparente Version */
-    bg-trans:     rgba(30, 30, 46, 0.8); /* Ein schönes Dunkelgrau/Blau als Fallback */
+    /* Wir erzwingen hier eine leicht transparente Hintergrundfarbe  */
+    bg-with-alpha: rgba(20, 20, 30, 0.8);
 
     background-color: transparent;
-    font: "JetBrainsMono Nerd Font 12";
+    font: "JetBrains Mono 12"; [cite: 10]
 }
 
 window {
-    width: 600px;
-    border: 3px;
+    width: 600px; [cite: 10]
+    height: 450px;
+    border: 3px; [cite: 11]
     border-color: @rosie-pink;
-    /* Hier erzwingen wir, dass der Hintergrund NICHT komplett schwarz ist */
-    background-color: @rosie-bg;
-    border-radius: 15px;
+    background-color: @bg-with-alpha; /* Nutzt Transparenz statt Vollschwarz */
+    border-radius: 15px; [cite: 11]
 }
 
 mainbox {
-    padding: 15px;
-    children: [inputbar, listview];
+    padding: 20px;
     background-color: transparent;
+    children: [inputbar, listview];
 }
 
 inputbar {
-    margin: 0px 0px 10px 0px;
-    padding: 5px;
+    background-color: transparent;
     children: [prompt, entry];
+    margin: 0px 0px 10px 0px;
 }
 
 prompt {
-    padding: 10px;
     background-color: @rosie-pink;
-    text-color: @rosie-bg;
-    border-radius: 10px;
+    padding: 10px;
+    text-color: @rosie-bg; /* Dunkler Text auf Pink [cite: 13] */
+    border-radius: 8px;
 }
 
 entry {
     padding: 10px;
-    /* Weiße Schrift für die Suche */
-    text-color: #ffffff;
+    text-color: #ffffff; /* ERZWUNGEN: Weißer Text für die Suche */
     placeholder: "Suchen...";
     placeholder-color: @rosie-fg;
 }
 
 listview {
-    columns: 1;
-    lines: 8;
-    spacing: 5px;
+    columns: 1; [cite: 14]
+    lines: 8; [cite: 14]
+    fixed-height: true;
     background-color: transparent;
 }
 
 element {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 8px;
+    border-radius: 8px;
     background-color: transparent;
 }
 
-/* WICHTIG: Das hier löst dein Problem mit der Schriftfarbe */
+/* Dieser Block ist entscheidend für die Sichtbarkeit der Schrift! */
 element-text {
-    text-color: #ffffff; /* Erzwingt WEISSE SCHRIFT */
+    text-color: #ffffff; /* ERZWUNGEN: Weißer Text für die App-Namen */
     background-color: transparent;
     vertical-align: 0.5;
 }
@@ -85,11 +84,10 @@ element-icon {
 }
 
 element selected {
-    /* Der Balken wird Pink, wenn du ein Item auswählst */
     background-color: @rosie-pink;
+    border-radius: 8px;
 }
 
 element-text selected {
-    /* Wenn ausgewählt, wird die Schrift dunkel für besseren Kontrast auf Pink */
-    text-color: #111111;
+    text-color: #111111; /* Dunkle Schrift auf dem pinken Auswahlbalken */
 }
