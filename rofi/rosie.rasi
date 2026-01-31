@@ -10,11 +10,12 @@ configuration {
 @import "~/.cache/wal/colors-rofi-pywal.rasi"
 
 * {
-    /* Wir erzwingen hier einen soliden, dunklen Hintergrund */
-    /* #11111b ist ein sehr edles, fast schwarzes Dunkelblau (Catppuccin Style) */
-    rosie-bg:     #11111b;
-    rosie-pink:   @color1;     /* Dein Pink von Pywal */
+    /* Wir definieren die Farben fest aus dem Pywal-Import */
+    rosie-pink:   @color1;     /* Die Hauptfarbe (Pink) */
+    rosie-bg:     @background;  /* Der Hintergrund vom Wallpaper */
+    rosie-fg:     @foreground;  /* Die helle Vordergrundfarbe */
 
+    /* Wir erzwingen hier einen soliden Hintergrund ohne Transparenz */
     background-color: transparent;
     font: "JetBrainsMono Nerd Font 11";
 }
@@ -22,69 +23,65 @@ configuration {
 window {
     width: 650px;
     border: 3px;
-    border-color: @rosie-pink;
-    background-color: @rosie-bg; /* Hier wird die Transparenz abgeschaltet */
+    border-color: @rosie-pink;   /* Dein Rosie-Pinker Rand */
+    background-color: @rosie-bg; /* Solider Hintergrund */
     border-radius: 12px;
 }
 
 mainbox {
     padding: 20px;
     background-color: @rosie-bg;
-    border-radius: 12px;
     children: [inputbar, listview];
 }
 
 inputbar {
     margin: 0px 0px 15px 0px;
     spacing: 10px;
-    background-color: transparent;
     children: [prompt, entry];
 }
 
 prompt {
-    padding: 8px 12px;
+    padding: 8px 15px;
     background-color: @rosie-pink;
-    text-color: #11111b;       /* Dunkler Text auf Pink */
+    text-color: @rosie-bg;      /* Dunkler Text auf pinkem Grund */
     border-radius: 8px;
 }
 
 entry {
     padding: 8px;
-    text-color: #ffffff;       /* Immer weiße Schrift in der Suche */
+    text-color: #ffffff;        /* ERZWUNGEN: Weißer Text beim Tippen */
     placeholder: "Suchen...";
-    placeholder-color: #555555;
+    placeholder-color: #666666;
 }
 
 listview {
     columns: 1;
     lines: 8;
-    spacing: 4px;
-    background-color: transparent;
+    spacing: 5px;
+    fixed-height: true;
 }
 
 element {
     padding: 10px;
     border-radius: 8px;
-    background-color: transparent;
 }
 
-/* --- DER WICHTIGSTE TEIL FÜR DIE SCHRIFT --- */
+/* Fix für die Schriftfarbe in der Liste */
 element-text {
-    text-color: #ffffff;       /* Erzwingt weisse Schrift */
-    background-color: transparent;
+    text-color: #ffffff;        /* ERZWUNGEN: Alle App-Namen in Weiß */
     vertical-align: 0.5;
 }
 
 element-icon {
-    size: 30px;
+    size: 32px;
     padding: 0 12px 0 0;
-    background-color: transparent;
 }
 
 element selected {
-    background-color: @rosie-pink;
+    background-color: @rosie-pink; /* Wenn ausgewählt: Pinker Balken */
 }
 
 element-text selected {
-    text-color: #11111b;       /* Text wird dunkel auf pinkem Grund */
+    text-color: #000000;        /* Wenn ausgewählt: Schwarze Schrift auf Pink */
+    font: "JetBrainsMono Nerd Font Bold 11";
 }
